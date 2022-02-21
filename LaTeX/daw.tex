@@ -1,0 +1,72 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[portuguese]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext,newtxmath} %TimesNewRoman
+\usepackage[sectionbib, numbers, comma, sort]{natbib}
+\usepackage{chapterbib}
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage[svgnames]{xcolor}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=ipbbrown]{hyperref}
+% \usepackage{minted}
+\usepackage{adjustbox}
+
+% school colours
+\definecolor{ipbgreen}{RGB}{166,204,59}
+\definecolor{ipbbrown}{RGB}{153,80,42}
+
+% code block style
+% \usemintedstyle{arduino}
+
+\title{
+  \includegraphics[scale=0.5]{ipbeja_logo.png}\\[0.5cm]
+  Gestor de Receitas do Restaurante\\ASP.NET Core\\Fase de Recurso
+} % Doc name
+\author{Gonçalo Amaro -- 1744} % Doc's author/s
+\date{15 de Fevereiro, 2022} % Doc date
+
+\def\blankpage{%
+      \clearpage%
+      \thispagestyle{empty}%
+      \addtocounter{page}{-1}%
+      \null%
+      \clearpage}
+
+\begin{document}
+\bibliographystyle{IEEEtranN}
+
+\maketitle
+
+\blankpage{}
+
+{
+  \hypersetup{linkcolor=black}
+  \tableofcontents
+}
+
+\newpage
+
+{
+  \hypersetup{linkcolor=black}
+  \listoffigures
+  \listoftables
+}
+
+\newpage
+
+\section{Introdução}
+
+\section{Desenvolvimento}
+
+\section{Conclusão}
+
+\section{Webgrafia}
+
+\renewcommand{\bibsection}{}
+\bibliography{daw.bib}
+
+\end{document}
