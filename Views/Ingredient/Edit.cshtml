@@ -1,0 +1,32 @@
+﻿@model RestaurantRecipeManager.Models.Compound.IngredientModel
+
+@{
+    ViewData["Title"] = ViewBag.Ingredient.Name;
+}
+
+<div class="text-center">
+    <h1 class="">Edit @ViewBag.Ingredient.Name</h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <form method="post" asp-area"" asp-controller="Ingredient" asp-action="ApplyEdit">
+                <!-- <input type="hidden" name="_method" value="put" /> Override not Working-->
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <input type="hidden" asp-for="IId" class="form-control" value="@ViewBag.Ingredient.IId" />
+                    <label asp-for="Name" class="control-label"></label>
+                    <input type="text" asp-for="Name" class="form-control" value="@ViewBag.Ingredient.Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <label asp-for="Quantity" class="control-label"></label>
+                    <input type="number" asp-for="Quantity" class="form-control" value="@ViewBag.Ingredient.Quantity" />
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
+                <div class="form-group pt-3">
+                    <input type="submit" value="Save" class="btn btn-success" />
+                    <a asp-area"" asp-controller="Ingredient" asp-action="View" asp-route-id="@ViewBag.Ingredient.IId" class="btn bth-danger">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

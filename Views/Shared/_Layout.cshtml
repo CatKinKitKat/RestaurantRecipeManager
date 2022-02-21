@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/bootswatch.min.css" />
+</head>
+<body>
+    <script src="~/js/bootstrap.min.js"></script>
+    <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand mx-5 d-sm-none" asp-area="" asp-controller="Home" asp-action="Index">RCM</a>
+        <a class="navbar-brand mx-5 d-none d-sm-block" asp-area="" asp-controller="Home" asp-action="Index">Restaurant Recipe Manager</a>
+        <button class="navbar-toggler me-5" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse px-5" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Recipe" asp-action="All">Recipes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Ingredient" asp-action="All">Ingredients</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <main role="main" class="">
+            @RenderBody()
+        </main>
+    </div>
+</body>
+</html>
