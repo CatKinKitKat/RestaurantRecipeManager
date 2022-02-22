@@ -1,0 +1,82 @@
+% !TeX program = LuaLaTeX
+% !TeX encoding = UTF-8
+% !TeX spellcheck = pt_PT
+% !TeX root = daw
+\documentclass[10pt,a4paper,final]{report}
+\usepackage[portuguese]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext,newtxmath} %TimesNewRoman
+\usepackage[sectionbib, numbers, comma, sort]{natbib}
+\usepackage{chapterbib}
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage[svgnames]{xcolor}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=ipbbrown]{hyperref}
+% \usepackage{minted}
+\usepackage{adjustbox}
+\usepackage[pagestyles]{titlesec}
+\usepackage[final]{pdfpages}
+\usepackage{placeins}
+
+\titleformat{\chapter}[display]{\normalfont\bfseries}{}{0pt}{\Huge}
+\newpagestyle{mystyle}
+{\sethead[\thepage][][\chaptertitle]{}{}{\thepage}}
+\pagestyle{mystyle}
+
+% school colours
+\definecolor{ipbgreen}{RGB}{166,204,59}
+\definecolor{ipbbrown}{RGB}{153,80,42}
+
+\title{
+  \includegraphics[scale=0.5]{ipbeja_logo.png}\\[0.5cm]
+  Gestor de Receitas do Restaurante\\ASP.NET Core\\Fase de Recurso
+} % Doc name
+\author{Gonçalo Amaro -- 17440} % Doc's author/s
+\date{15 de Fevereiro, 2022} % Doc date
+
+\def\blankpage{%
+      \clearpage%
+      \thispagestyle{empty}%
+      \addtocounter{page}{-1}%
+      \null%
+      \clearpage
+}
+
+
+\begin{document}
+\bibliographystyle{IEEEtranN}
+
+\maketitle
+
+\blankpage{}
+
+{
+  \hypersetup{linkcolor=black}
+  \tableofcontents
+}
+
+% \newpage
+% 
+% {
+%   \hypersetup{linkcolor=black}
+%   \listoffigures
+%   \listoftables
+% }
+
+\newpage
+
+\input{Pages/Intro}
+\input{Pages/ProjectBegin}
+\input{Pages/Database}
+\input{Pages/Api}
+\input{Pages/WebApp}
+\input{Pages/Tests}
+\input{Pages/End}
+\input{Pages/Webgraphy}
+\input{Pages/Annex}
+
+\end{document}

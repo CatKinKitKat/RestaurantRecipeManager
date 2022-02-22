@@ -1,0 +1,106 @@
+\chapter{Implementação da API}
+
+A API RESTful para comunicação externa foi a primeira tarefa a ser desenvolvida.
+
+A sua conclusão delinearia a estrutura do projecto e encaminhava a forma como os dados são tratados e como os reimplementamos nos controladores com \textit{Views}.
+
+Para uma API ser RESTful, deve ser possível a comunicação entre o cliente e o servidor, via os métodos HTTP (GET, POST, PUT, DELETE, etc, e com a formatação referente ao modelo de dados num formato de notação de objectos (JSON ou XML).
+
+Esta deve também usar um \textit{standard} de nomenclatura para comunicar os erros.
+
+Esse \textit{standard} usa cinco trios de números, dos quais os que começam por 1 são mensagens informativas, os que começam por 2 são mensagens de sucesso, os que começam por 3 são mensagens de redireccionamento, os que começam por 4 são mensagens de erro de cliente e os que começam por 5 são mensagens de erro de servidor.
+
+Neste caso específico, a API RESTful usa o modelo de dados composto, semelhante a um \textit{ViewModel}, que é um modelo de dados que contém dados de outros modelos, em formato de notação JSON, para via os quatro principais métodos HTTP (GET, POST, PUT, DELETE).
+
+\section{Gestão de ingredientes}
+
+Para a gestão de ingredientes, a API RESTful usa dois métodos HTTP GET, um POST, um PUT e um DELETE.
+
+Os quais são usados para consultar todos os ingredientes, consultar um ingrediente específico, criar um ingrediente, editar um ingrediente ou eliminar um ingrediente.
+
+Estes URI são:
+
+\begin{itemize}
+  \item \textit{/api/ingredients/list}: \textbf{GET} para consultar todos os ingredientes.
+  \item \textit{/api/ingredients/view/\{id\}}: \textbf{GET} para consultar um ingrediente específico.
+  \item \textit{/api/ingredients/add}: \textbf{POST} para criar um ingrediente. Usamos no \textit{body} no formato JSON para enviar os dados, com o formato do IngredienteModel (que é um modelo composto).
+  \item \textit{/api/ingredients/edit/}: \textbf{PUT} para editar um ingrediente. Usamos no \textit{body} no formato JSON para enviar os dados, com o formato do IngredienteModel (que é um modelo composto).
+  \item \textit{/api/ingredients/remove/\{id\}}: \textbf{DELETE} para eliminar um ingrediente.
+\end{itemize}
+
+O modelo de dados composto, IngredientModel, contém os seguintes
+campos:
+
+\begin{itemize}
+  \item \textbf{IId}: identificador do ingrediente.
+  \item \textbf{Name}: nome do ingrediente.
+  \item \textbf{Quantity}: quantidade do ingrediente.
+\end{itemize}
+
+Estes campos são obrigatórios.
+
+\section{Gestão de receitas}
+
+Na gestão de receitas, a API RESTful usa dois métodos HTTP GET, um POST, um PUT e um DELETE.
+
+Os quais são usados para consultar todas as receitas, consultar uma receita específica, criar uma receita, editar uma receita ou eliminar uma receita.
+
+Os URI são:
+
+\begin{itemize}
+  \item \textit{/api/recipes/list}: \textbf{GET} para consultar todas as receitas.
+  \item \textit{/api/recipes/view/\{id\}}: \textbf{GET} para consultar uma receita específica.
+  \item \textit{/api/recipes/add}: \textbf{POST} para criar uma receita. Usamos no \textit{body} no formato JSON para enviar os dados, com o formato do RecipeModel (que é um modelo composto).
+  \item \textit{/api/recipes/edit/}: \textbf{PUT} para editar uma receita. Usamos no \textit{body} no formato JSON para enviar os dados, com o formato do RecipeModel (que é um modelo composto).
+  \item \textit{/api/recipes/remove/\{id\}}: \textbf{DELETE} para eliminar uma receita.
+\end{itemize}
+
+O RecipeModel, que é um modelo composto, contém os seguintes campos:
+
+\begin{itemize}
+  \item \textbf{RId}: identificador da receita.
+  \item \textbf{Name}: nome da receita.
+  \item \textbf{Ingredients}: ingredientes da receita.
+\end{itemize}
+
+Este campo Ingredients é um IEnumerable, que é um tipo de dados que permite a criação de listas de dados.
+
+Esta lista é composta por objectos do tipo RecipeModel.Ingredient, que é um objecto interno do modelo RecipeModel.
+
+Este objeto é composto pelos seguintes campos:
+
+\begin{itemize}
+  \item \textbf{IId}: identificador do ingrediente.
+  \item \textbf{Quantity}: quantidade do ingrediente.
+\end{itemize}
+\section{Error Handling}
+
+Para a gestão de erros, a API está rodeada de blocos \textit{try-catch} e faz vários \textit{checks if} para verificar se ocorreu algum erro.
+
+Se ocorreu, o erro é tratado e retornado ao cliente um código de erro e uma mensagem de erro.
+
+Os códigos de erro são:
+
+\begin{itemize}
+  \item \textbf{400}: Bad Request. Ocorre quando o cliente envia dados mal formatados.
+  \item \textbf{404}: \textit{Not Found}. Ocorre quando o recurso não foi encontrado.
+  \item \textbf{500}: \textit{Internal Server Error}. Ocorre quando ocorre um erro no servidor.
+\end{itemize}
+
+Na versão rescrita da API, como existe o uso de um login básico
+(inseguro, mas funcional) com nome e hash no \textit{body}, a API pode
+ainda retornar:
+
+\begin{itemize}
+  \item \textbf{401}: \textit{Unauthorized}. Ocorre quando o cliente não está autenticado.
+  \item \textbf{403}: \textit{Forbidden}. Ocorre quando o cliente não tem permissão para aceder ao recurso.
+\end{itemize}
+
+\section{Implementação de uma Autenticação (básica e
+  insegura)}
+
+Foi criada uma classe privada herdeira do modelo composto adequado ao controlador, onde se adiciona o campo \textit{UserName} e \textit{Passhash}. Estes campos são usados para autenticar o cliente.
+
+A qual vamos buscar a role do usuário se o mesmo estiver autenticado, para verificar se o cliente tem permissão para aceder ao recurso.
+
+Esta verificação é feita no método inicio do método responsável por executar a acção pedida, onde retorna o código de erro 403 (\textit{Forbidden}) se o cliente não tiver permissão para aceder ao recurso, ou o código de erro 401 (\textit{Unauthorized}) se o cliente não estiver autenticado ou a hash não corresponder à hash do utilizador.

@@ -1,0 +1,130 @@
+\chapter{Implementação da Aplicação Web}
+
+A aplicação web é constituída por um conjunto de páginas HTML, que são carregadas pelo servidor. Estas usam um roteamento diferente, que é na prática uma API interna, que é acessada pelo cliente através dos formulários nas \textit{Views}.
+
+\section{Gestão de ingredientes}
+
+Para a gestão de ingredientes, a Webapp usa quatro métodos HTTP GET e dois métodos HTTP POST. Os quais são usados para consultar todos os ingredientes, consultar um ingrediente específico, criar um ingrediente e editar um ingrediente. Não existe a utilização de métodos PUT e DELETE, visto que os formulários HTML e Razor não suportam estes métodos.
+
+Estes URI são:
+
+\begin{itemize}
+  \item \textit{/api/ingredient/all}: \textbf{GET} para consultar todos os
+  ingredientes.
+  \item \textit{/api/ingredient/view/\{id\}}: \textbf{GET} para consultar um
+  ingrediente específico.
+  \item \textit{/api/ingredient/add}: \textbf{GET} para receber o formulário
+  para criar um ingrediente.
+  \item \textit{/api/ingredient/edit/\{id\}}: \textbf{GET} para receber o
+  formulário para editar um ingrediente.
+  \item \textit{/api/ingredient/delete/\{id\}}: \textbf{GET} para eliminar um
+  ingrediente.
+\end{itemize}
+
+Os quais comunicam com as URI:
+
+\begin{itemize}
+  \item \textit{/api/ingredient/applyadd}: \textbf{POST} para criar um
+  ingrediente.
+  \item \textit{/api/ingredient/applyedit}: \textbf{POST} para editar um
+  ingrediente.
+\end{itemize}
+
+O modelo de dados composto, IngredienteModel, contém os seguintes
+campos:
+
+\begin{itemize}
+  \item \textbf{IId}: identificador do ingrediente.
+  \item \textbf{Name}: nome do ingrediente.
+  \item \textbf{Quantity}: quantidade do ingrediente.
+\end{itemize}
+
+Estes campos são obrigatórios.
+
+\section{Gestão de receitas}
+
+Na gestão de receitas, a API RESTful usa sete métodos HTTP GET e quatro métodos HTTP POST. Os quais são usados para consultar todas as receitas, consultar uma receita específica, criar uma receita e editar uma receita. Não existe a utilização de métodos PUT e DELETE, visto que os formulários HTML e Razor não suportam estes métodos.
+
+Os URI são:
+
+\begin{itemize}
+  \item \textit{/api/recipe/all}: \textbf{GET} para consultar todas as receitas.
+  \item \textit{/api/recipe/view/\{id\}}: \textbf{GET} para consultar uma
+  receita específica.
+  \item \textit{/api/recipe/add}: \textbf{GET} para receber o formulário para
+  criar uma receita.
+  \item \textit{/api/recipe/addingredient/\{id\}}: \textbf{GET} para receber o
+  formulário para adicionar um ingrediente à receita.
+  \item \textit{/api/recipe/editname/\{id\}}: \textbf{GET} para receber o
+  formulário para editar o nome de uma receita.
+  \item \textit{/api/recipe/editingredients/\{id\}}: \textbf{GET} para receber o
+  formulário para ver os ingredientes a editar de uma receita.
+  \item \textit{/api/recipe/editingredient/\{id\}}: \textbf{GET} para receber o
+  formulário para editar um ingrediente de uma receita.
+  \item \textit{/api/recipe/delete/\{id\}}: \textbf{GET} para eliminar uma
+  receita.
+  \item \textit{/api/recipe/deleteingredient/\{id\}}: \textbf{GET} para eliminar
+  um ingrediente de uma receita.
+\end{itemize}
+
+Os quais comunicam com as URI:
+
+\begin{itemize}
+  \item \textit{/api/recipe/applyadd}: \textbf{POST} para criar uma receita.
+  \item \textit{/api/recipe/applyaddingredient}: \textbf{POST} para adicionar um
+  ingrediente à receita.
+  \item \textit{/api/recipe/applynameedit}: \textbf{POST} para editar o nome de
+  uma receita.
+  \item \textit{/api/recipe/applyingredientedit}: \textbf{POST} para editar um
+  ingrediente de uma receita.
+\end{itemize}
+
+O RecipeVM, que é um \textit{ViewModel}, contém os seguintes campos:
+
+\begin{itemize}
+  \item \textbf{RId}: identificador da receita.
+  \item \textbf{Name}: nome da receita.
+\end{itemize}
+
+O RecipeAddVM, que é um \textit{ViewModel}, contém os seguintes campos:
+
+\begin{itemize}
+  \item \textbf{RId}: identificador da receita.
+  \item \textbf{RilId}: identificador do ingrediente-receita.
+  \item \textbf{IId}: identificador do ingrediente.
+  \item \textbf{Name}: nome da receita.
+  \item \textbf{Quantity}: quantidade do ingrediente.
+\end{itemize}
+
+O RecIngListsVM, que é um \textit{ViewModel}, contém os seguintes campos:
+
+\begin{itemize}
+  \item \textbf{RId}: identificador da receita.
+  \item \textbf{IId}: identificador do ingrediente.
+  \item \textbf{RilId}: identificador do ingrediente-receita.
+  \item \textbf{Quantity}: quantidade do ingrediente.
+\end{itemize}
+
+
+\section{Error Handling}
+
+Para a gestão de erros, a API está rodeada de blocos \textit{try-catch} e faz vários \textit{checks if} para verificar se ocorreu algum erro. Se ocorreu, o erro é tratado e retornado ao cliente um código de erro e uma mensagem de erro.
+
+Os códigos de erro são:
+
+\begin{itemize}
+  \item \textbf{400}: Bad Request. Ocorre quando o cliente envia dados mal
+  formatados.
+  \item \textbf{404}: Not Found. Ocorre quando o recurso não foi encontrado.
+  \item \textbf{500}: Internal Server Error. Ocorre quando ocorre um erro no
+  servidor.
+\end{itemize}
+
+Na versão rescrita da API, como existe o uso de um login básico (inseguro, mas funcional) com nome e hash no \textit{body}, a API pode ainda retornar:
+
+\begin{itemize}
+  \item \textbf{401}: Unauthorized. Ocorre quando o cliente não está
+  autenticado.
+  \item \textbf{403}: Forbidden. Ocorre quando o cliente não tem permissão
+  para aceder ao recurso.
+\end{itemize}

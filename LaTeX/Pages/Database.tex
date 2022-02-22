@@ -1,0 +1,53 @@
+\chapter{Base de dados}
+
+Aqui descrevo os passos para criar um projecto ASP.NET Core (\textit{Database First}).
+
+\section{Pré-requisitos}
+
+Instalar o Visual Studio 2019 com ASP.NET Core \textit{Development} e \textit{Database  Development Tools}, de seguida instalamos o \textit{SQL Server Express} e o \textit{SQL Server Management Studio}.
+
+Abrir o terminal e executar o comando:
+
+\begin{itemize}
+
+  \item \texttt{dotnet\ tool\ install\ -\/-global\ dotnet-ef}
+\end{itemize}
+
+\section{Pacotes}
+
+Instalar pacotes de NuGet:
+
+\begin{itemize}
+
+  \item Microsoft.AspNetCore.Identity.EntityFrameworkCore
+  \item Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
+  \item Microsoft.EntityFrameworkCore.SqlServer
+  \item Microsoft.EntityFrameworkCore.Tools
+  \item Microsoft.VisualStudio.Web.CodeGeneration.Design Atenção:
+  \item Estou a usar o Visual Studio 2019, logo só tenho a versão do .NET Core 5.0. Como tal:
+  \item As versões dos pacotes tem de ser 5.0.XX para funcionar.
+\end{itemize}
+
+\section{SQL Server}
+
+Criar uma base de dados:
+
+\begin{itemize}
+
+  \item Criar uma base de dados \textit{SQL Server} via \textit{Queries} no \textit{SQL Server Management Studio}.
+  \item Todas as tabelas devem ter PKs, devem ser NOT NULL e as FKs têm de fazer ON DELETE CASCADE. O \textit{EF Core} não suporta Tabelas sem PKs.
+\end{itemize}
+
+\section{Scaffolding}
+
+Abrir o terminal (\textit{CTRL+Ç}) e executar o comando:
+
+\begin{itemize}
+
+  \item \texttt{dotnet\ ef\ dbcontext\ scaffold\ "Server=.\textbackslash{}SQLExpress;Database=DatabaseName;;Trusted\_Connection=True;"\ Microsoft.EntityFrameworkCore.SqlServer\ -output-dir\ Models\ -\/-context-dir\ Data\ -\/-namespace\ ProjectName.Models\ -\/-context-namespace\ ProjectName.Data\ -\/-context\ ProjectNameContext\ -f\ -\/-no-onconfiguring}
+\end{itemize}
+
+Entrar em todos os ficheiros gerados e eliminar todos os \textit{partial},
+\textit{virtual} e \textit{?} que não são necessários para um funcionamento correcto, em especifico, de
+seguida, entrar no ficheiro \textit{ProjectNameContext.cs} e remover a menção do
+\textit{partial class final} e a sua \textit{override implementation}.

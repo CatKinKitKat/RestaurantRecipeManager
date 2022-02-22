@@ -1,0 +1,31 @@
+\chapter{Introdução}
+
+\section{Introdução}
+
+Este presente trabalho tem como objectivo demonstrar a implementação de um sistema de gestão de receitas e ingredientes para um Chefe de Restaurante.
+
+Sendo este uma \textit{fork} de duas tarefas de quatro totais demonstradas num trabalho prévio, o qual no capitulo seguinte está uma renderização do mesmo.
+
+\section{Estrutura deste Relatório}
+
+Este relatório está organizado da seguinte forma: Introdução, Analise do Sistema (onde se usa o trabalho de analise da época normal, o qual está bom e saturado de boa informação), Inicio e caracterização do Projecto, Base de dados, Implementação da API, Implementação da WebApp, Testes, Conclusão.
+
+\section{Análise do Sistema}
+
+A análise deste sistema foi feita em época normal, para não refazer (e possivelmente de uma pior forma) esse trabalho anterior, decidi incluir uma renderização desse \textit{.pdf} na secção dos Anexos, \hyperref[pdf:analysis]{nomeadamente o primeiro}. No entanto podemos resumir.
+
+\subsection{Análise do Sistema Resumo}
+
+O objectivo geral deste trabalho é a criação de uma aplicação web que permita o acesso aos clientes e funcionários do restaurante aos menus disponíveis na ementa, mesas disponíveis, reservas no restaurante, gestão do stock de alimentos.
+
+A análise apresenta três actores: João Miguel (Cliente), Ivone Silva (Gerente) e Raul Joaquim (Funcionário). Os quais são apresentados os detalhes, vida e casos de uso para cada persona.
+
+Sendo que existem no total quinze principais acções descritas na análise, as quais são agrupas em quatro casos de uso: Gestão de Receitas, Gestão de Ingredientes e Stock, Gestão de Reservas e Mesas, Acções de cliente (consulta de receitas e reservas). Seguidamente é apresentado os gráficos UML e os \textit{drafts} das interfaces referentes aos casos de uso. 
+
+É através dessas necessidades que é criada e apresentado os modelos de Entidade-Relação e da Base de Dados. Os quais são imediatamente apresentados nesse capítulo.
+
+\subsection{Casos de Uso a mim atribuídos}
+
+Dos quatro casos de uso, foram-me atribuídos os: Gestão de Receitas, Gestão de Ingredientes e Stock. Os quais facilita, caso não haja tempo para implementar sistema de Login, pode ser implementado como uma aplicação direcionada ao staff de cozinha.
+
+Neste relatório descrevo assim essa versão direcionada aos proficionais de cozinha, criada em ASP.NET Core.

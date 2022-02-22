@@ -1,0 +1,64 @@
+\chapter{Inicio do Projecto}
+
+O inicio do projecto começou com a criação de uma Base de Dados, que implementa o modelo definido no trabalho de investigação anterior, apresentado em época normal.
+
+Seguidamente, foi criado um novo projecto no Visual Studio, que implementa o template de ASP.NET Core WebApp MVC, com a base de dados criada anteriormente.
+
+Posteriormente foi inicializado um repositório git, em que definimos a origem para o meu repositório pessoal no GitHub, assim tendo uma portabilidade e gestão de versões.
+
+Noto que para a aprendizagem e criação deste projecto, usei os tutoriais do \href{https:\/\/www.linkedin.com\/in\/nick-chapsas}{Nick Chapsas} \cite{nickLI} no \href{https:\/\/www.youtube.com\/c\/Elfocrash}{YouTube} \cite{nickYT} e o seus exemplos no \href{https:\/\/github.com\/Elfocrash}{GitHub} \cite{nickGH}.
+
+\section{O Projecto}
+
+Este projecto deve implementar um sistema de gestão de receitas, que deve permitir ao utilizador criar, editar e eliminar receitas.
+
+Quer seja via web, ou via RESTful API.
+
+\section{Estilo de código e estrutura do   projecto}
+
+É o típico código OOP com estrutura MVC, com dois tipos de \textit{Models} um de Dados relacionados directamente com a Tabela da DB e um de Dados Transaccionais entre Cliente e Servidor, \textit{Views} e dois grupos de \textit{\textit{controllers}}, um de controlo interno para as \textit{Views} e outro de controlo externo para a API.
+
+\subsection{Objectivos}
+
+Visto que os dois casos de uso para mim escolhidos (dos quatro possíveis, estabelecidos no trabalho investigativo anterior), com suporte unânime do grupo\/par, foram:
+
+\begin{itemize}
+  \item \textbf{Consultar receitas e ingredients}: para consultar as receitas e os ingredients que estão associados a essas receitas.
+  \item \textbf{Gestão de ingredientes e receitas}: para criar, editar ou eliminar ingredientes e receitas.
+\end{itemize}
+
+Conseguimos determinar que temos de facto, os quatro principais métodos HTTP (GET, POST, PUT, DELETE), os quais uma REST API usa (em conjunto com as tecnologias de notação JSON e XML) para comunicar.
+
+Tendo assim uma boa base de estudo e trabalho prático.
+
+Em suma, este trabalho tem de ser feito com o objectivo de aprender a usar a linguagem de programação ASP.NET Core, de forma a criar um sistema de gestão de receitas e ingredientes, com a possibilidade de criar, editar ou eliminar receitas e ingredientes via API RESTful e ainda com interface de gestão de receitas e ingredientes via Web.
+
+\subsection{\textit{Models}}
+
+O modelo de dados é um conjunto de classes que representam a estrutura de dados da aplicação.
+
+Logo, os modelos principais são os da directoria \textit{Models}, que representam as tabelas da base de dados.
+
+No entanto, existem também modelos que representam dados que não estão associados a uma tabela, mas sim servem para facilitar a utilização e comunicação nos controladores entre os clientes e o servidor.
+
+Estes são os modelos da subdirectoria \textit{API}\/\textit{Models}, pois são modelos compostos, que são modelos que contêm dados de outros modelos, de forma a facilitar a comunicação entre cliente e servidor. São semelhantes a \textit{ViewModels}, melhor dizendo servem o mesmo propósito, mas atribuo outro nome visto que não estão relacionados com \textit{Views}.
+
+Existem também \textit{ViewModel}, que como dito anteriormente com os seus similares, os compostos, servem para facilitar a comunicação entre cliente e servidor através de um modelo que facilite a criação de uma \textit{View}.
+
+\subsection{\textit{Controllers}}
+
+Um \textit{controller} é um conjunto de métodos que manipulam dados e são chamados pelo cliente.
+
+Os controladores ``principais'' são os da directoria \textit{\textit{controllers}}, que representam os grupos de métodos que manipulam dados da aplicação de forma visual.
+
+Ou seja, manipulam dados directamente para as \textit{Views} que eles geram.
+
+Já para a API, os controladores são os da diretoria API\/\textit{\textit{controllers}}, que manipulam dados para a API (RESTful), em formato JSON, com a formatação referente ao modelo de dados composto.
+
+\subsection{\textit{Views}}
+
+As \textit{Views} são as páginas HTML que apresentam os dados para o cliente.
+
+As \textit{Views} principais são as da directoria \textit{Views}, que representam as páginas HTML que apresentam dados para o cliente.
+
+Estas são retornadas pelos controladores ``principais'', que são os controladores da directoria \textit{\textit{controllers}}, que manipulam dados para as \textit{Views}.
