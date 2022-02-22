@@ -16,7 +16,7 @@
                     </div>
                     <div class="card-body">
                         <a asp-area="" asp-controller="Ingredient" asp-action="Edit" asp-route-id="@ViewBag.Ingredient.IId" class="btn btn-warning">Edit</a>
-                        <a href="#" class="btn btn-danger">Delete</a>
+                        <a asp-area="" asp-controller="Ingredient" asp-action="Delete" asp-route-id="@ViewBag.Ingredient.IId" class="btn btn-danger">Delete</a>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,33 @@
+﻿@model RestaurantRecipeManager.ViewModels.RecIngListsVM
+
+@{
+    ViewData["Title"] = "Edit Recipe";
+    var ingredients = ViewBag.Ingredients; // Ril, Ri, Ii, Quant
+    Dictionary<byte, string> names = ViewBag.NameDict;
+}
+
+<div class="text-center">
+    <h1 class="">Edit Recipe</h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4">
+        </div>
+        <div class="col-4">
+            <div class="row d-flex justify-content-center">
+                @foreach (var ingredient in ingredients)
+                {
+                    <div class="card mw-75">
+                        <div class="card-body">
+                            <h5 class="card-title">@names[@ingredient.Item3]</h5>
+                            <h6 class="card-subtitle pb-3">@ingredient.Item4 units</h6>
+                            <a asp-area="" asp-controller="Recipe" asp-action="EditIngredient" asp-route-id="@ingredient.Item1" class="text-reset text-decoration-none stretched-link"></a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+</div>

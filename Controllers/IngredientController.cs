@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RestaurantRecipeManager.API.Models;
 using RestaurantRecipeManager.Data;
-using RestaurantRecipeManager.Models.Compound;
+using RestaurantRecipeManager.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -178,16 +179,108 @@ namespace RestaurantRecipeManager.Controllers
             return RedirectToRoute(new { controller = "Ingredient", action = "Edit", id = form.IId });
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult Add()
         {
+
+            var last = _context.Ingredients.OrderByDescending(x => x.IId).FirstOrDefault();
+            byte newIId = 1;
+
+            if (last != null)
+            {
+                newIId += last.IId;
+            }
+
+            ViewBag.NewIId = newIId;
+
             return View();
         }
 
-        [HttpDelete("{id:int}")]
+        [HttpPost]
+        public IActionResult ApplyAdd(IngredientModel form)
+        {
+            if (form.IId >= 1 && form.IId <= 255)
+            {
+                try
+                {
+                    var ingredient = _context.Ingredients.Find(form.IId);
+                    var stock = _context.Stock.Where(x => x.IId == form.IId).FirstOrDefault();
+
+                    if (ingredient != null)
+                    {
+                        return BadRequest(new { error = "Ingredient with id = " + form.IId + " already exists." });
+                    }
+
+                    if (stock != null)
+                    {
+                        return StatusCode(StatusCodes.Status500InternalServerError, new { error = "Ingredient with id = " + form.IId + " is unknown but it's in stock. Call support." });
+                    }
+
+                    Ingredient ingredientModel = new Ingredient()
+                    {
+                        IId = form.IId,
+                        Name = form.Name
+                    };
+
+                    Stock stockModel = new Stock()
+                    {
+                        IId = form.IId,
+                        Quantity = form.Quantity
+                    };
+
+                    _context.Ingredients.Add(ingredientModel);
+                    _context.Stock.Add(stockModel);
+
+                    _context.SaveChanges();
+
+                    return RedirectToRoute(new { controller = "Ingredient", action = "View", id = form.IId });
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    return StatusCode(StatusCodes.Status500InternalServerError, new { error = "There was an error processing your request." });
+                }
+            }
+
+            return RedirectToRoute(new { controller = "Ingredient", action = "All" });
+        }
+
+        //[HttpDelete("{id:int}")] Should be a delete but HTML href doesn't allow
+        [HttpGet("{id:int}")]
         public IActionResult Delete(byte id)
         {
-            return View();
+            if (id >= 1 && id <= 255)
+            {
+                try
+                {
+                    var ingredient = _context.Ingredients.Find(id);
+                    var stock = _context.Stock.Where(x => x.IId == id).FirstOrDefault();
+
+                    if (ingredient == null)
+                    {
+                        return NotFound(new { error = "Ingredient with id = " + id + " does not exist." });
+                    }
+
+                    if (stock == null)
+                    {
+                        return StatusCode(StatusCodes.Status500InternalServerError, new { error = "Ingredient with id = " + id + " is known but does not exist. Call support." });
+                    }
+
+                    _context.Ingredients.Remove(ingredient);
+                    _context.Stock.Remove(stock);
+
+                    _context.SaveChanges();
+
+                    return RedirectToRoute(new { controller = "Ingredient", action = "All" });
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    return StatusCode(StatusCodes.Status500InternalServerError, new { error = "There was an error processing your request." });
+                }
+            }
+
+            return RedirectToRoute(new { controller = "Ingredient", action = "View", id = id });
         }
     }
 }

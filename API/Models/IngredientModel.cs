@@ -1,4 +1,4 @@
-﻿namespace RestaurantRecipeManager.Models.Compound
+﻿namespace RestaurantRecipeManager.API.Models
 {
     public class IngredientModel
     {

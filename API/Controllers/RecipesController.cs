@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RestaurantRecipeManager.API.Models;
 using RestaurantRecipeManager.Data;
 using RestaurantRecipeManager.Models;
-using RestaurantRecipeManager.Models.Compound;
 using System;
 using System.Collections.Generic;
 using System.Linq;

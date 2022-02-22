@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = ViewBag.Recipe.Name;
+
+}
+
+<div class="text-center">
+    <h1 class="">@ViewBag.Recipe.Name</h1>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="row d-flex justify-content-center">
+                <div class="card mw-75">
+                    <div class="card-body">
+                        <h5 class="card-title text-black pb-3">Ingredients:</h5>
+                        @foreach (var ingredient in (ViewBag.Ingredients as List<(string name,byte quantity)>))
+                        {
+                    <p class="card-text">@ingredient.name: @ingredient.quantity units</p>
+                        }
+                    </div>
+                    <div class="card-body">
+                        <a asp-area="" asp-controller="Recipe" asp-action="EditName" asp-route-id="@ViewBag.Recipe.RId" class="btn btn-primary">Edit Name</a>
+                        <a asp-area="" asp-controller="Recipe" asp-action="AddIngredient" asp-route-id="@ViewBag.Recipe.RId" class="btn btn-success">Add Ingredient</a>
+                        <a asp-area="" asp-controller="Recipe" asp-action="EditIngredients" asp-route-id="@ViewBag.Recipe.RId" class="btn btn-warning">Edit Ingredients</a>
+                        <a asp-area="" asp-controller="Recipe" asp-action="Delete" asp-route-id="@ViewBag.Recipe.RId" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

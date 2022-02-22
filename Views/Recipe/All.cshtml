@@ -19,13 +19,18 @@
                         {
                             <p class="card-text text-muted py-0 my-0">@ingredient.Quantity units of @ViewBag.LazyTranslate[ingredient.IId]</p>
                         }
-                        <a href="#" class="text-reset text-decoration-none stretched-link"></a>
+                        <a asp-area="" asp-controller="Recipe" asp-action="View" asp-route-id="@recipe.RId" class="text-reset text-decoration-none stretched-link"></a>
                     </div>
                 </div>
             }
         </div>
         <div class="col-4">
-            <img src="~/img/placeholder.svg" alt="Placeholder image. Free to use on non-comercial purposes: https://caluyadesign.wpengine.com/your-opinion-is-not-part-of-recipe-svg-png-eps-dxf/">
+            <div class="container-fluid d-flex justify-content-center">
+                <a asp-area="" asp-controller="Recipe" asp-action="Add" class="btn btn-outline-primary">Add New Recipe</a>
+            </div>
+            <div class="container-fluid d-flex justify-content-center">
+                <img src="~/img/placeholder.svg" alt="Placeholder image. Free to use on non-comercial purposes: https://caluyadesign.wpengine.com/your-opinion-is-not-part-of-recipe-svg-png-eps-dxf/">
+            </div>
         </div>
     </div>
 </div>

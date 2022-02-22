@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace RestaurantRecipeManager.Models.Compound
+namespace RestaurantRecipeManager.API.Models
 {
     public class RecipeModel
     {

@@ -1,30 +1,29 @@
 ﻿@model RestaurantRecipeManager.API.Models.IngredientModel
 
 @{
-    ViewData["Title"] = ViewBag.Ingredient.Name;
+    ViewData["Title"] = "Add Ingredient";
 }
 
 <div class="text-center">
-    <h1 class="">Edit @ViewBag.Ingredient.Name</h1>
+    <h1 class="">Add Ingredient</h1>
 </div>
 <div class="container-fluid">
     <div class="row">
         <div class="col d-flex justify-content-center">
-            <form method="post" asp-area="" asp-controller="Ingredient" asp-action="ApplyEdit">
-                <!-- <input type="hidden" name="_method" value="put" /> Override not Working-->
+            <form method="post" asp-area"" asp-controller="Ingredient" asp-action="ApplyAdd">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <input type="hidden" asp-for="IId" class="form-control" value="@ViewBag.Ingredient.IId" />
+                    <input type="number" asp-for="IId" class="form-control d-none" value="@ViewBag.NewIId" />
                     <label asp-for="Name" class="control-label"></label>
-                    <input type="text" asp-for="Name" class="form-control" value="@ViewBag.Ingredient.Name" />
+                    <input type="text" asp-for="Name" class="form-control" value="Ingredient " />
                     <span asp-validation-for="Name" class="text-danger"></span>
                     <label asp-for="Quantity" class="control-label"></label>
-                    <input type="number" asp-for="Quantity" class="form-control" value="@ViewBag.Ingredient.Quantity" />
+                    <input type="number" asp-for="Quantity" class="form-control" value="1" />
                     <span asp-validation-for="Quantity" class="text-danger"></span>
                 </div>
                 <div class="form-group pt-3">
                     <input type="submit" value="Save" class="btn btn-success" />
-                    <a asp-area="" asp-controller="Ingredient" asp-action="View" asp-route-id="@ViewBag.Ingredient.IId" class="btn btn-danger">Cancel</a>
+                    <a asp-area="" asp-controller="Ingredient" asp-action="All" class="btn btn-danger">Cancel</a>
                 </div>
             </form>
         </div>

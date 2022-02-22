@@ -1,0 +1,34 @@
+﻿@model RestaurantRecipeManager.ViewModels.RecIngListsVM
+
+@{
+    ViewData["Title"] = "Edit Recipe";
+}
+
+<div class="text-center">
+    <h1 class="">Add Recipe Ingredient</h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <form method="post" asp-area"" asp-controller="Recipe" asp-action="ApplyAddIngredient">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="number" asp-for="RilId" value="@ViewBag.Item.RilId" class="form-control d-none" />
+                <input type="number" asp-for="RId" value="@ViewBag.Item.RId" class="form-control d-none" />
+                <div class="form-group">
+                    <label asp-for="IId" class="control-label"></label>
+                    <input asp-for="IId" class="form-control" value="@ViewBag.Item.IId" />
+                    <span asp-validation-for="IId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Quantity" class="control-label"></label>
+                    <input asp-for="Quantity" class="form-control" value="@ViewBag.Item.Quantity" />
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-3">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <a asp-area="" asp-controller="Recipe" asp-action="All" class="btn btn-danger">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
