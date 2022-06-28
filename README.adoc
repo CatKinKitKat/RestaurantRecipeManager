@@ -1,0 +1,9 @@
+= RestaurantRecipeManager
+
+One of the grade projects for the DAW course (Web Aplications Developement) in my Computer Science Degree.
+
+== Description
+
+This is a ASP.NET Core App (written in C#) which has two APIs, an internal one for the Razor Frontend and an external, exposed REST API so it can be used somewhere else.
+
+Since this was part of a group project from which I departed, the project which was suposed to be a Restaurant Management System, not only the kitchen and pantry managment, but my departure had made my teacher making me choose some tasks and abandon others. So, it became this.
